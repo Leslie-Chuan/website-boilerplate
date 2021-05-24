@@ -3,9 +3,11 @@
   "scripts": {
     "start": "umi dev",
     "build": "umi build",
+    "test": "wukong release-umi -b=test",
+    "prod": "cross-env CUSTOME_ENV=prod wukong release-umi",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
-    "test": "umi-test",
+    "umi-test": "umi-test",
     "test:coverage": "umi-test --coverage"
   },
   "gitHooks": {

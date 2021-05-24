@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta lang="zh" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="renderer" content="webkit" />
+  <meta name="description" content="网站描述" />
+  <meta name="keyword" content="网站描述" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="shortcut icon" />
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+    }
+  </style>
+  <script type="text/javascript">
+    window.page_start = +new Date();
+    ~function (window) {
+      var uAgent = window.navigator.userAgent;
+      var isIOS = uAgent.match(/iphone/i);
+      var isYIXIN = uAgent.match(/yixin/i);
+      var is2345 = uAgent.match(/Mb2345/i);
+      var ishaosou = uAgent.match(/mso_app/i);
+      var isSogou = uAgent.match(/sogoumobilebrowser/ig);
+      var isLiebao = uAgent.match(/liebaofast/i);
+      var isGnbr = uAgent.match(/GNBR/i);
+
+      var dataDv = document.documentElement.dataset.dw || 750;
+      var minFontSize = 42;
+      var maxFontSize = 100;
+
+      function resizeRoot() {
+        var wWidth = (screen.width > 0) ? (window.innerWidth >= screen.width || window.innerWidth == 0) ? screen.width : window.innerWidth : window.innerWidth;
+        if (isIOS) {
+          wWidth = screen.width;
+        }
+        var wFsize = wWidth > dataDv ? maxFontSize : wWidth / (dataDv / 100);
+        wFsize = wFsize > minFontSize ? wFsize : minFontSize;
+        document.documentElement.style.fontSize = wFsize + 'px';
+      }
+
+      var tid;
+      window.addEventListener('resize', function () {
+        clearTimeout(tid);
+        tid = setTimeout(resizeRoot, 300);
+      }, false);
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) {
+          clearTimeout(tid);
+          tid = setTimeout(resizeRoot, 300);
+        }
+      }, false);
+
+      if (isYIXIN || is2345 || ishaosou || isSogou || isLiebao || isGnbr) {
+        setTimeout(function () {
+          resizeRoot();
+        }, 500);
+      } else {
+        resizeRoot();
+      }
+    }(window);
+  </script>
+  
+</head>
+
+<body>
+  <div id="root"></div>
+  <!-- 打点脚本 -->
+  <script>
+    (function () {
+      let url =
+        'https://cdn.XXXXX.com/ieu-log-sdk/common/sdk.js?v=' +
+        Math.ceil(new Date().getTime() / 1000 / 3600);
+      document.write(
+        '\x3Cscript type="text/javascript" src="' + url + '">\x3C/script>'
+      );
+    })();
+  </script>
+  <script type="text/javascript">
+    initIeuLog({ bizCode: 'bizCode' }, '上报地址');
+  </script>
+</body>
+
+</html>
